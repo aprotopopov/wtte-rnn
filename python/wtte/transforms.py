@@ -9,7 +9,8 @@ from six.moves import xrange
 from .tte_util import get_tte, get_is_not_censored
 
 
-def df_to_array(df, column_names, nanpad_right=True, return_lists=False, id_col='id', t_col='t'):
+def df_to_array(df, column_names, nanpad_right=True, return_lists=False,
+                id_col='id', t_col='t'):
     """ converts flat pandas df `{id,t,col1,col2,..}` to array indexed `[id,t,col]`.
 
     :param df: dataframe with columns
@@ -32,10 +33,6 @@ def df_to_array(df, column_names, nanpad_right=True, return_lists=False, id_col=
       * if !nanpad_right & return_lists:
         n_seqs numpy float sub-arrays of dimension `[seqlen,n_features]`
     """
-
-    # df.sort_values(by=['id','t'], inplace=True)
-    # set the index to be this and don't drop
-    df.set_index(keys=[id_col], drop=False, inplace=True)
     unique_ids = df[id_col].unique()
 
     n_seqs = len(unique_ids)
